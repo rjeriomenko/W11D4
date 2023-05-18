@@ -16,10 +16,23 @@ export default function cartReducer (state = {}, action) {
 
     switch (action.type) {
         case RECEIVE_CART:
-            return newState[action.itemId] = {
-                id: action.itemId,
-                count: 1
+            // newState[action.itemId] = {
+            //     id: action.itemId,
+            //     count: 1
+            // }
+            // return newState
+            let item = newState[action.itemId];
+            let count = 1;
+            if (item) {
+                count = item.count + 1;
             }
+            return {
+                ...newState,
+                [action.itemId]: {
+                    id: action.itemId,
+                    count: count
+                }
+            };
         default:
             return newState;
     }
